@@ -1,0 +1,109 @@
+/* CSS */
+
+/*Basic styles */
+
+body {
+	font-family: sans-serif;
+	padding-top: 20px;
+}
+
+h1 {
+	font-size: 75px;
+	text-align: center;
+}
+
+h2 {
+	font-size: 30px;
+	margin-bottom: 20px;
+}
+
+h3 {
+	font-size: 16px;
+}
+
+h4 {
+	font-size: 14px;
+}
+
+p {
+	font-size: 14px;
+	line-height: 30px;
+}
+
+ul {
+	padding-left: 10px;
+	margin-bottom: 10px;
+}
+
+li {
+	padding-left: 10px;	
+	margin-bottom: 10px;
+}
+
+li a {
+	font-size: 16px;
+}
+
+section {
+	margin: 10px;
+	padding: 10px;
+}
+
+pre {
+	margin: 10px;
+	background-color: #272822;
+	color: #fff;
+}
+
+
+/* subtitle */
+
+.page-header {
+	margin-bottom: 40px;
+}
+
+.subtitle {
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.list-header {
+	margin-bottom: 10px
+}
+
+.letters {
+	text-align: center;
+}
+
+
+.quote {
+	font-size: 80px;
+	font-style: italic;
+	max-width: 80%;
+	margin: 20px auto;
+	background-color: #eee;
+	padding: 20px;
+
+}
+
+
+.letters .letter {
+	border: 1px solid #000;
+	display: inline-block;
+    padding-top: 10px;
+    padding-bottom: 10px;
+	font-size: 20px;
+	font-weight: bold;
+	color: #2d2d2d;
+	background-color: #ccc;
+	width: 40px;
+	text-align: center;
+	text-transform: uppercase;
+	border-radius: 3px;
+	margin-right: 5px;
+}
+
+.letters .letter.space {
+	opacity: 0
+}
