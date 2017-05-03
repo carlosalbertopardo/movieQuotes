@@ -1,6 +1,5 @@
 'use strict';
 
-
 var movieQuotes = (function () {
 
 	var quotes = [];
@@ -37,20 +36,51 @@ var movieQuotes = (function () {
 var movieQuotesArray = [
 	{
 		quote: 'I\'m the king of the world',
-		movieTitle: 'Titanic'
+		movieTitle: 'Titanic',
+		img: '../imgs/movies/titanic.png'
 	},
 	{
 		quote: 'Luke i\'m your father!',
-		movieTitle: 'Star Wars'
+		movieTitle: 'Star Wars',
+		img: '../imgs/movies/star-wars.png'
 	},
 	{
 		quote: 'I hate snakes',
-		movieTitle: 'Indiana Jones'
-	},
+		movieTitle: 'Indiana Jones',
+		img: '../imgs/movies/indiana-jones.png'
+	}/*,
 	{
 		quote: 'You\'re gonna need a bigger boat.',
 		movieTitle: 'Jaws'
-	}
+	},
+	{
+		quote: 'They may take our lives, but they\'ll never take our freedom!',
+		movieTitle: 'Brave'
+	},
+	{
+		quote: 'When you realize you want to spend the rest of your life with somebody, you want the rest of your life to start as soon as possible.',
+		movieTitle: 'When Harry Met Sally'
+	},
+	{
+		quote: 'You complete me.',
+		movieTitle: 'Jerry Maguire'
+	},
+	{
+		quote: 'These go to eleven.',
+		movieTitle: 'Spinal Tap'
+	},
+	{
+		quote: 'I\'m just one stomach flu away from my goal weight.',
+		movieTitle: 'The Devil Wears Prada'
+	},
+	{
+		quote: 'They call it a Royale with cheese.',
+		movieTitle: 'Pulp Fiction'
+	},
+	{
+		quote: 'I\'m having an old friend for dinner.',
+		movieTitle: 'the Silence of the Lambs'
+	}*/
 ];  
 
 movieQuotesArray.map(function(element,index) {

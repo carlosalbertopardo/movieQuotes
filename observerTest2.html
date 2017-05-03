@@ -1,0 +1,122 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    div {
+        height: 40px;
+        width: 200px;
+        border: 1px solid #000;
+    }
+    </style>
+    <script>
+    /* Defino al Observer Element */
+    function ObserverList() {
+        this.observerList = [];
+    }
+    ObserverList.prototype.add = function(observer) {
+        this.observerList.push(observer);
+    }
+    ObserverList.prototype.remove = function(observer){
+    	this.observerList.splice(this.indexOf(observer),1);
+    };
+    ObserverList.prototype.count = function() {
+        return this.observerList.length;
+    };
+    ObserverList.prototype.indexOf = function(observer) {
+        var i;
+        for (var i = 0; i < this.observerList.length; i++) {
+            if (this.observerList[i] === observer) {
+                return i;
+            }
+        }
+    };
+    ObserverList.prototype.getObserver = function(index) {
+        return this.observerList[index];
+    };
+
+
+
+    /*Subject*/
+    function Subject() {
+        this.observers = new ObserverList();
+    }
+    Subject.prototype.addObserver = function(obj) {
+        this.observers.add(obj);
+    };
+    Subject.prototype.removeObserver = function(obj) {
+        this.observers.remove(obj);
+    };
+    Subject.prototype.notify = function(ctx) {
+        var i;
+        for (i = 0; i < this.observers.count(); i++) {
+            this.observers.getObserver(i).update(ctx);
+        }
+    };
+
+
+
+
+    /* Function update for each observer */
+    function Observer(){
+    	this.update = function(){
+    		/*best implemented in the concrete type*/
+    	}
+    }
+
+    //Why not new directly?
+    var extend = function(obj, interface){
+    	var k;
+    	for( k in interface){
+    		obj[k] = interface[k];
+    	}
+    }
+
+
+    window.onload = function() {
+    	extend(subject, new Subject());
+    	extend(observer1,new Observer());
+    	extend(observer2,new Observer());
+    	extend(observer3,new Observer());
+
+    	var subject = new Subject();
+
+    	subject.addObserver(observer1);
+    	subject.addObserver(observer2);
+    	subject.addObserver(observer3);
+    	
+    	//Esta es la posta
+    	subject.addEventListener('keyup',function(){
+    		this.notify(this.value);
+    	},false);
+
+    	observer1.update = function(val){
+    		this.innerHTML = val;
+    	}
+    	observer2.update = function(val){
+    		this.innerHTML = val;
+    	}
+    	observer3.update = function(val){
+    		this.innerHTML = val;
+    	}
+    	window.setTimeout(function(){
+    		subject.removeObserver(observer3);
+    	},2000);
+    };
+    </script>
+</head>
+
+<body>
+    subject:
+    <input type="text" id="subject">
+    <br> observers:
+    <div id="observer1"></div>
+    <div id="observer2"></div>
+    <div id="observer3"></div>
+</body>
+
+</html>

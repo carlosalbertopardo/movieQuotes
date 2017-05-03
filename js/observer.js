@@ -31,7 +31,11 @@ ObserverList.prototype.indexOf = function( obj, startIndex ){
  
   return -1;
 };
- 
+
+ObserverList.prototype.getList = function () {
+  return this.observerList;
+}
+
 ObserverList.prototype.removeAt = function( index ){
   this.observerList.splice( index, 1 );
 };
@@ -74,6 +78,8 @@ function extend( obj, extension ){
   }
 }
 
+var pepe = new Subject();
+
 
 
 // References to our DOM elements
@@ -95,6 +101,8 @@ controlCheckbox.onclick = function(){
  
 addBtn.onclick = addNewObserver;
  
+
+
 // Concrete Observer
  
 function addNewObserver(){
@@ -118,3 +126,10 @@ function addNewObserver(){
   // Append the item to the container
   container.appendChild( check );
 }
+
+
+/* Tengo un subject y muchos observers que lo miran. Cuando el subject CAMBIA los observers va a queresr hacer algo.
+CAda observer va a tener un metodo UPDATE con su propia implementacion.
+
+1) cuando el subject cambie su estado va a invocar al metodo NOTIFY.
+2) Al hacer Notify() en el subject, por cada unos de los observers, ejecutas el metodo update de cada uno.
