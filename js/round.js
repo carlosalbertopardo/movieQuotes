@@ -2,16 +2,19 @@ var Round = (function () {
 
 	var currentErrors = 0;
 	var current = 0;
-	var titleLetters = {};
+	var letterObjects = [];
 
+
+	//Load the movie Quote inside the container
 	function loadCard(quote) {
 
-		//Load the movie Quote inside the container
+
 		var $quoteContainer = $('#quote');
 		$quoteContainer.html(quote);
 	
 	}
 
+	//Clears a section html
 	function clearSection(sectionId) {
 
 		var $answerContainer = $(sectionId);
@@ -19,23 +22,20 @@ var Round = (function () {
 
 	}
 
-	function showletter(letter) {
-
-		$(letter).html( $(letter).attr('data-attr'));
-
-	}
-
-	function updateLetterObject(letterString) {
+	//TODO
+	function updateLetterObject(letterId) {
 		
-		titleLetters[letterString] = true;
+		//letterObjects[letterId].guessed = true;
 
 	}
 
+
+	//TODO
 	function checkWin() {
 
-		for (letter in titleLetters ) {
+		for (letter in letterObjects ) {
 
-			if(titleLetters[letter] == false ){
+			if(letterObjects[letter].guessed == false ){
 				return
 			}
 
@@ -45,78 +45,51 @@ var Round = (function () {
 
 	}
 
-	function bindLetters() {
+	//Create the events for each key
+	function setKeyboard () {
 
-		$('body').keyup(function (event) {
+		$('body').keyup(function (event) { //The keyup always returns the uppercase letter keycode.
+			
+			if ((event.keyCode >= 48 && event.keyCode <= 90) || (event.keyCode >= 96 && event.keyCode <= 105)) { 
 
-			//jquery's map is different?
+				//trigger event
 
-			var elements =  $('span[data-attr="' + event.key.toUpperCase() + '"');
+				$( window).trigger( "keyCodePress-"+event.keyCode , event.key);
 
-			if(elements.length !== 0) {
-
-				$('span[data-attr="' + event.key.toUpperCase() + '"').map(function (index, element) {
-
-					showletter(element);
-					updateLetterObject(event.key.toUpperCase());
-					
-					if (checkWin()) {
-						alert('You won!!!');
-					};
-
-				});
-
-			} else {
-				
-				currentErrors++;
-
-				if (currentErrors >= 3) {
-
-					alert('looooserrr');
-				
-				}
+				updateLetterObject(event.key.toUpperCase());
+		
+				/*
+				if (checkWin()) {
+					alert('You won!!!');
+				};
+				*/
 
 			}
 
-		});
+		})
+
+		console.log(letterObjects);
 
 	}
 
+
+	//Load the title of each movie.
 	function loadAnswer(title) {
 
 		clearSection('#answers');
 
 		var titleArray = title.split('');
+		var letterFactory = new LetterFactory;
 
 		titleArray.map(function (element, index) {
 
-			//Create the letter element
-			var letter = document.createElement('span');
-			$(letter).addClass('letter');
-
-			element = element.toUpperCase();
-
-
-			$(letter).attr('data-attr', element);
-
-			//TODO
-			letter.innerHTML = 'X';
-
-			//Create Spaces
-			if(element === ' ') {
-				$(letter).addClass('space');
-			} else {
-				//push letters 
-				titleLetters[element] = false;
-			}
-
-
-			$('#answers').append(letter);
-
+			var letterObject = letterFactory.createLetter(element);
+			letterObjects[letterObject.id] = letterObject;
+			letterObject.render('#answers');
 
 		})
 
-		bindLetters();
+		setKeyboard();
 
 	}
 
