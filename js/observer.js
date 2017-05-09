@@ -133,3 +133,51 @@ CAda observer va a tener un metodo UPDATE con su propia implementacion.
 
 1) cuando el subject cambie su estado va a invocar al metodo NOTIFY.
 2) Al hacer Notify() en el subject, por cada unos de los observers, ejecutas el metodo update de cada uno.
+
+
+
+    /*
+    $('body').keyup(function (event) {
+
+      //jquery's map is different?
+
+      var elements =  $('span[data-attr="' + event.key.toUpperCase() + '"');
+
+      if(elements.length !== 0) {
+
+        $('span[data-attr="' + event.key.toUpperCase() + '"').map(function (index, element) {
+
+          showletter(element);
+          updateLetterObject(event.key.toUpperCase());
+          
+          if (checkWin()) {
+            alert('You won!!!');
+          };
+
+        });
+
+      } else {
+        
+        currentErrors++;
+
+        if (currentErrors >= 3) {
+
+          alert('looooserrr');
+
+        }
+
+      }
+
+    });*/
+
+      //Generates a random id
+  /*
+  function generatId() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
+  }*/

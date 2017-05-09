@@ -18,11 +18,9 @@ var movieQuotes = (function () {
 			Round.init(currentCard);
 
 		},
-
 		loadQuote: function (quoteObject) {
 			quotes.push(quoteObject);
 		},
-
 		showMovies: function () {
 			console.log(quotes);
 		}
@@ -34,16 +32,17 @@ var movieQuotes = (function () {
 
 
 var movieQuotesArray = [
+	/*
 	{
 		quote: 'I\'m the king of the world',
 		movieTitle: 'Titanic',
 		img: '../imgs/movies/titanic.png'
-	},
+	}/*,*/
 	{
 		quote: 'Luke i\'m your father!',
 		movieTitle: 'Star Wars',
 		img: '../imgs/movies/star-wars.png'
-	},
+	}/*,
 	{
 		quote: 'I hate snakes',
 		movieTitle: 'Indiana Jones',

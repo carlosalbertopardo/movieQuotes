@@ -1,11 +1,8 @@
 function LetterFactory () {}
 
-
 LetterFactory.prototype.createLetter = function(letter) {
 
-	function createLetterStructure () {
-
-		console.log(this);
+	function createLetterStructure (letterObject) {
 
 		//create Letter Structure
 		var letterStructure = document.createElement('span');
@@ -21,14 +18,13 @@ LetterFactory.prototype.createLetter = function(letter) {
 			$(letterStructure).addClass('space');
 		}
 
-		bindKey(letter, letterStructure);
+		bindKey(letterObject, letterStructure)
 
 		return letterStructure;
 
 	}
 
 	function getLetterKeyCode(letter) {
-
 		var keycode  = letter.toUpperCase().charCodeAt(0);
 		return keycode;
 
@@ -39,6 +35,7 @@ LetterFactory.prototype.createLetter = function(letter) {
 	}
 
 	//Generates a random id
+	/*
 	function generatId() {
 	  function s4() {
 	    return Math.floor((1 + Math.random()) * 0x10000)
@@ -47,68 +44,43 @@ LetterFactory.prototype.createLetter = function(letter) {
 	  }
 	  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
 	    s4() + '-' + s4() + s4() + s4();
-	}
+	}*/
 
 
 	//Bind key to letter
-	function bindKey(letter, letterStructure) {
+	function bindKey(letterObject, letterStructure) {
 
-		var keycode = getLetterKeyCode(letter);
+		var keycode = getLetterKeyCode(letterObject.letter);
 
 		$( window ).on( "keyCodePress-"+keycode , function( event, keyLetter ) {
-			
 			showLetter(letterStructure, keyLetter);
-
+			letterObject.setGuessed('true');
+			letterObject.notify(keyLetter);
 		});
-
-		/*
-		$('body').keyup(function (event) {
-
-			//jquery's map is different?
-
-			var elements =  $('span[data-attr="' + event.key.toUpperCase() + '"');
-
-			if(elements.length !== 0) {
-
-				$('span[data-attr="' + event.key.toUpperCase() + '"').map(function (index, element) {
-
-					showletter(element);
-					updateLetterObject(event.key.toUpperCase());
-					
-					if (checkWin()) {
-						alert('You won!!!');
-					};
-
-				});
-
-			} else {
-				
-				currentErrors++;
-
-				if (currentErrors >= 3) {
-
-					alert('looooserrr');
-
-				}
-
-			}
-
-		});*/
 
 	}
 
 	var letterObject = {
-		id: generatId(),
-		structure: createLetterStructure(letter),
+		//id: generatId(),
+		structure: null,
 		guessed: false,
+		letter: letter,
 		setGuessed: function(bool){
-			this.guessed = bool
+			this.guessed = bool;
+		},
+		notify: function (letter) {
+			$(window).trigger( 'notifyLetterChange' , letter);
 		},
 		render: function function_name(parent) {
 			$(parent).append(this.structure);
 		},
+		init: function(){
+			this.structure = createLetterStructure(this);
+		}
 
 	}
+
+	letterObject.init();
 
 	return letterObject;
 
