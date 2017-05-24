@@ -44,7 +44,12 @@ var movieQuotes = (function () {
 
 
 var movieQuotesArray = [
-
+	
+	{
+		quote: 'casa',
+		movieTitle: 'e t',
+		img: '../imgs/movies/titanic.png'
+	},
 	{
 		quote: 'I\'m the king of the world',
 		movieTitle: 'Titanic',
@@ -54,7 +59,7 @@ var movieQuotesArray = [
 		quote: 'Luke i\'m your father!',
 		movieTitle: 'Star Wars',
 		img: '../imgs/movies/star-wars.png'
-	},
+	}/*,
 	{
 		quote: 'I hate snakes',
 		movieTitle: 'Indiana Jones',

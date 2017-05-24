@@ -20,36 +20,57 @@ var Round = (function () {
 
 	}
 
+
+	function bindKeys (event) { //The keyup always returns the uppercase letter keycode.
+		
+		if ((event.keyCode >= 48 && event.keyCode <= 90) || (event.keyCode >= 96 && event.keyCode <= 105)) { 
+
+			console.log('event.keyCode');
+			console.log(event.keyCode);
+
+			//trigger event
+			$( window).trigger( "keyCodePress-"+event.keyCode , event.key);
+
+			/* Check if the event Does not exist */
+			if ($._data(window, 'events')["keyCodePress-"+event.keyCode] === undefined) {
+				round.checkLoss(event.key);
+			}
+
+		};
+
+	}
+
+
 	//Create the events for each key
 	function setKeyboard (round) {
 
-		$('body').keyup(function (event) { //The keyup always returns the uppercase letter keycode.
-			
-			if ((event.keyCode >= 48 && event.keyCode <= 90) || (event.keyCode >= 96 && event.keyCode <= 105)) { 
-
-				console.log('event.keyCode');
-				console.log(event.keyCode);
-
-				//trigger event
-				$( window).trigger( "keyCodePress-"+event.keyCode , event.key);
-
-				/* Check if the event Does not exist */
-				if ($._data(window, 'events')["keyCodePress-"+event.keyCode] === undefined) {
-
-					round.checkLoss(event.key);
-
-				}
-
-
-			};
-
-		});
+		$('body').keyup(bindKeys);
 
 		$(window).on('notifyLetterChange', function(event, letter) {
 			round.checkWin();
 		});
 
 	}
+
+	function unbindKeyEvents() {
+
+		$('body').off('keyup');
+
+		var activeEvents = $._data(window, 'events');
+
+		console.log($._data(window, 'events'));
+
+		for (event in activeEvents) {
+
+			$(window).off(event);
+
+		}
+
+		console.log('unbindenEVENTS!!!');
+		console.log($._data(window, 'events'));
+
+	}
+
 
 	return {
 		movieTitle: null,
@@ -105,11 +126,14 @@ var Round = (function () {
 		},
 		checkLoss: function (letter) {
 
+
+			console.log('checking LOSS!!!');
+			console.log(letter);
+
+
 			letter = letter.toUpperCase();
 
 			var letters = this.movieTitle.letters;
-
-			console.log(letters);
 
 			for (var i = 0; i < letters.length; i++) {
 			
@@ -149,8 +173,8 @@ var Round = (function () {
 		},
 		close: function () {
 			
-
 			this.hideButtons();
+			unbindKeyEvents();
 			currentErrors = 0;
 			$('.current-movie-errors').html(this.currentErrors);
 			console.log('CLOSING ROUND');
