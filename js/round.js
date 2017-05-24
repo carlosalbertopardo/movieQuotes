@@ -21,7 +21,7 @@ var Round = (function () {
 	}
 
 
-	function bindKeys (event) { //The keyup always returns the uppercase letter keycode.
+	function bindKeys (event, round) { //The keyup always returns the uppercase letter keycode.
 		
 		if ((event.keyCode >= 48 && event.keyCode <= 90) || (event.keyCode >= 96 && event.keyCode <= 105)) { 
 
@@ -44,7 +44,9 @@ var Round = (function () {
 	//Create the events for each key
 	function setKeyboard (round) {
 
-		$('body').keyup(bindKeys);
+		$('body').keyup(function () {
+			return bindKeys(event,round);
+		});
 
 		$(window).on('notifyLetterChange', function(event, letter) {
 			round.checkWin();
@@ -129,7 +131,6 @@ var Round = (function () {
 
 			console.log('checking LOSS!!!');
 			console.log(letter);
-
 
 			letter = letter.toUpperCase();
 
