@@ -8,28 +8,40 @@
 
 	</head>
 	<body>
-
-		<h1>Movie Quotes</h1>
-
-
-		<!--
-			<button id="addNewObserver">Add New Observer checkbox</button>
-			<input id="mainCheckbox" type="checkbox"/>
-			<div id="observersContainer"></div>
-		-->
-
+		<header>
+			<h1>Movie Quotes</h1>
+			<p class="subtitle">Which movie is it?</p>			
+		</header>
 		<main>
-
 			<section>
-				<h2>Which movie is it?</h2>
 				<div id="quoteContainer">
-					<blockquote id="quote" class="quote">
-					</blockquote>
+				    <blockquote class="screen">
+				    	<q id="quote" class="quote"></q>
+				    </blockquote>
 				</div>
 				<div id="answers" class="letters">
 				</div>
-			</section>
 
+				<div class="results">
+					<div class="round-number">
+					</div>
+					<div class="total-errors">
+					</div>
+					<div>Current Errors <span class="current-movie-errors">0</span>						
+					</div>										
+				</div>
+				<div class="controls">
+					<div class="">
+						<div class="messages">
+							<div class="win status">Great job!</div>
+							<div class="lose status">What? You didn't watch that one? It's an awesome movie! :D</div>
+						</div>
+						<div>
+							<button id="nextMovie" type="button">Next Round</button>
+						</div>
+					</div>
+				</div>				
+			</section>
 		</main>
 		<script type="text/javascript" src="js/libs/jquery.min.js"></script>
 		<script type="text/javascript" src="js/title.js"></script>

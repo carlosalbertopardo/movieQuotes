@@ -4,7 +4,6 @@ var Round = (function () {
 	var current = 0;
 	var letterObjects = [];
 
-
 	//Load the movie Quote inside the container
 	function loadCard(quote) {
 
@@ -28,10 +27,19 @@ var Round = (function () {
 			
 			if ((event.keyCode >= 48 && event.keyCode <= 90) || (event.keyCode >= 96 && event.keyCode <= 105)) { 
 
+				console.log('event.keyCode');
+				console.log(event.keyCode);
+
 				//trigger event
 				$( window).trigger( "keyCodePress-"+event.keyCode , event.key);
 
-				round.checkLoss(event.key);
+				/* Check if the event Does not exist */
+				if ($._data(window, 'events')["keyCodePress-"+event.keyCode] === undefined) {
+
+					round.checkLoss(event.key);
+
+				}
+
 
 			};
 
@@ -47,11 +55,19 @@ var Round = (function () {
 		movieTitle: null,
 		init: function (roundInfo) {
 			
-			loadCard(roundInfo.quote);
-			
-			this.loadAnswer(roundInfo.movieTitle);
+			if ( typeof roundInfo !== 'undefined') {
 
-			setKeyboard(this);
+				loadCard(roundInfo.quote);
+				this.loadAnswer(roundInfo.movieTitle);
+				setKeyboard(this);
+
+				this.currentErrors = 0;
+				$('.current-movie-errors').html(0);				
+
+			} else {
+				alert('Game Finished');
+			}
+
 		},
 		loadAnswer: function (titleString) {
 
@@ -79,18 +95,21 @@ var Round = (function () {
 
 				if (!letters[i].guessed) {
 					console.log('not yet');
-
 					return false;
 				}
 
 			}
 
-			alert('you won!!');
+			this.finishRound('win');
 
 		},
 		checkLoss: function (letter) {
 
+			letter = letter.toUpperCase();
+
 			var letters = this.movieTitle.letters;
+
+			console.log(letters);
 
 			for (var i = 0; i < letters.length; i++) {
 			
@@ -101,11 +120,41 @@ var Round = (function () {
 			
 			}
 
+			console.log(this.currentErrors);
+
 			this.currentErrors++;
 
+			//updateCurrent errors in the html
+			$('.current-movie-errors').html(this.currentErrors);
+
 			if(this.currentErrors >= 3) {
-				alert('game lost');
+				this.finishRound('lose');
 			}
+		},
+		finishRound: function (status) {
+
+			this.showButtons(status);
+			//Show modal to continue.
+
+		},
+		showButtons: function(status) {
+
+			$('.controls').show();
+			$('.controls .' +status ).show();
+
+		},
+		hideButtons: function () {
+			$('.controls').hide();
+			$('.controls .status').hide();			
+		},
+		close: function () {
+			
+
+			this.hideButtons();
+			currentErrors = 0;
+			$('.current-movie-errors').html(this.currentErrors);
+			console.log('CLOSING ROUND');
+
 		}
 
 	}

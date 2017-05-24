@@ -7,15 +7,27 @@ var movieQuotes = (function () {
 	//Private Methods
 	function getMovieInfo() {
 		var index = Math.floor(Math.random() * (quotes.length) );
-		return quotes[index];
+		var movieObject = quotes[index];
+		quotes.splice(index,1);
+		return movieObject;
 	};
 
+	function setNextMovieButton() {
+		$('#nextMovie').click(function () {
+
+			Round.close();
+			var newCard = getMovieInfo();
+			Round.init(newCard);
+
+		});
+	}
 
 	return {
 		init: function() {
 
 			var currentCard = getMovieInfo();
 			Round.init(currentCard);
+			setNextMovieButton();
 
 		},
 		loadQuote: function (quoteObject) {
@@ -32,29 +44,29 @@ var movieQuotes = (function () {
 
 
 var movieQuotesArray = [
-	/*
+
 	{
 		quote: 'I\'m the king of the world',
 		movieTitle: 'Titanic',
 		img: '../imgs/movies/titanic.png'
-	}/*,*/
+	},
 	{
 		quote: 'Luke i\'m your father!',
 		movieTitle: 'Star Wars',
 		img: '../imgs/movies/star-wars.png'
-	}/*,
+	},
 	{
 		quote: 'I hate snakes',
 		movieTitle: 'Indiana Jones',
 		img: '../imgs/movies/indiana-jones.png'
-	}/*,
+	},
 	{
 		quote: 'You\'re gonna need a bigger boat.',
 		movieTitle: 'Jaws'
-	},
+	}/*,
 	{
 		quote: 'They may take our lives, but they\'ll never take our freedom!',
-		movieTitle: 'Brave'
+		movieTitle: 'Braveheart'
 	},
 	{
 		quote: 'When you realize you want to spend the rest of your life with somebody, you want the rest of your life to start as soon as possible.',

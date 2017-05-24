@@ -1,20 +1,48 @@
 /* CSS */
 
+
+
+
+
 /*Basic styles */
+
+@font-face {
+    font-family: CaviarRegular;
+    src: url(../fonts/CaviarDreams.ttf);
+}
+
+@font-face {
+    font-family: Rechman;
+    src: url(../fonts/rechman.ttf);
+}
+
+@font-face {
+    font-family: QuietStreets;
+    src: url(../fonts/QuietStreets.ttf);
+}
 
 body {
 	font-family: sans-serif;
 	padding-top: 20px;
+    background: url(../img/backgrounds/movie-seats.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: bottom;
+    background-color: #000;
+    color: #fff;
 }
 
 h1 {
 	font-size: 75px;
 	text-align: center;
+	font-family: CaviarRegular;
+	margin-bottom: 10px;
 }
 
 h2 {
 	font-size: 30px;
 	margin-bottom: 20px;
+
 }
 
 h3 {
@@ -55,7 +83,6 @@ pre {
 	color: #fff;
 }
 
-
 /* subtitle */
 
 .page-header {
@@ -77,14 +104,50 @@ pre {
 }
 
 
-.quote {
-	font-size: 80px;
-	font-style: italic;
-	max-width: 80%;
-	margin: 20px auto;
-	background-color: #eee;
-	padding: 20px;
+.screen {
+    font-size: 80px;
+    font-style: italic;
+    max-width: 80%;
+    margin: 20px auto;
+    background-color: #eee;
+    padding: 20px;
+    height: 400px;
+    border-radius: 25px;
+    position: relative;
+}
 
+.screen .quote {
+    color: #000;
+    font-family: QuietStreets;
+    text-align: right;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 30px;
+    max-width: 75%;
+    line-height: 45px;
+}
+
+q { 
+    display: inline;
+	quotes: initial;
+}
+
+q:before { 
+    content: open-quote;
+}
+
+q:after { 
+    content: close-quote;
+}
+}
+
+q:before { 
+    content: open-quote;
+}
+
+q:after { 
+    content: close-quote;
 }
 
 
@@ -106,4 +169,13 @@ pre {
 
 .letters .letter.space {
 	opacity: 0
+}
+
+/* Application styles  */
+
+
+.controls,
+.win,
+.lose {
+	display: none;
 }
